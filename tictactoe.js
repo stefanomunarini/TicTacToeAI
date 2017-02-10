@@ -28,9 +28,9 @@ $(document).ready( function () {
             if ($(this).text().length == 0) { // only clicks in free cells
                 if (counter % 2 == 0) { // wait for the oppo to make the move
                     $(this).text('X');
+                    board_dict[this.id] = $(this).text();
                     counter++;
                 }
-                board_dict[this.id] = $(this).text();
                 var winner = check_board();
                 if (!winner && counter < 9){
                     make_ai_move();
@@ -39,14 +39,14 @@ $(document).ready( function () {
                     if (winner == 'O') {
                         stop_timer();
                         enabled = false;
-                        $('#winner').text('You lost the game!');
+                        $('#winner').text('You lose!');
                         $("#pause-game").hide();
                     }
                 } else if (winner == 'X') {
                     stop_timer();
                     send_score(calculate_final_score());
                     enabled = false;
-                    $('#winner').text('You won the game!');
+                    $('#winner').text('You win!');
                     $("#pause-game").hide();
                 } else if (counter == 9){
                     $('#winner').text('It\'s a tie!');
@@ -277,11 +277,10 @@ function start_timer() {
 
 function stop_timer() {
     end_time = new Date().getTime();
-    calculate_total_time();
 }
 
 function calculate_total_time() {
-    total_time = ((end_time - start_time) / 1000) % 60 + previous_time;
+    return ((end_time - start_time) / 1000) % 60 + previous_time;
 }
 
 function calculate_final_score(){
@@ -310,10 +309,10 @@ function calculate_moves_score(){
     //      4 moves      : 5  points
     //      moves >= 5   : 1  point
     var moves_score = 0;
-    var moves_counter = counter/2;
-    if (moves_counter >= 0 && moves_counter <= 3){
+    var moves_counter = counter;
+    if (counter >= 0 && counter <= 5){
         moves_score = 10;
-    } else if (moves_counter == 4){
+    } else if (counter == 7){
         moves_score = 5;
     } else {
         moves_score = 1;
@@ -323,7 +322,7 @@ function calculate_moves_score(){
 
 function calculate_time_score(){
     // Return the score based on the time taken to win the game
-    var x = total_time / 3;
+    var x = calculate_total_time() / 3;
     x = parseInt(x.toString()); // keep only the decimal part, without approximation
     return 10 - x;
 }
