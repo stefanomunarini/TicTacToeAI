@@ -40,14 +40,17 @@ $(document).ready( function () {
                         stop_timer();
                         enabled = false;
                         $('#winner').text('You lost the game!');
+                        $("#pause-game").hide();
                     }
                 } else if (winner == 'X') {
                     stop_timer();
                     send_score(calculate_final_score());
                     enabled = false;
                     $('#winner').text('You won the game!');
+                    $("#pause-game").hide();
                 } else if (counter == 9){
                     $('#winner').text('It\'s a tie!');
+                    $("#pause-game").hide();
                 }
             }
         }
@@ -100,9 +103,8 @@ function calculate_next_move() {
     // - WIN always win if possible with the current board status;
     // - BLOCK_OPPO if no chances to win with the current board status,
     //              but one or more chances for the opponent to win with
-    //              the next move;
-    // - RANDOM_MOVE TODO this should be improved to follow a more clever strategy
-    //              make a random move if none of the above applies
+    //              the next move, then block it;
+    // - RANDOM_MOVE make a random move if none of the above applies
     var decision = {'win': null, 'stop_oppo': null};
     for (var i=0; i<3; i++) {
         var row = {};
@@ -162,22 +164,25 @@ function calculate_next_cell(row, row_occurrences){
     // Return a dictionary containing the two possible next moves
     // Return null values if no win or block_oppo moves are found
     var decision = {'win': null, 'stop_oppo': null};
-    if (row_occurrences['O'] == 2 && row_occurrences['X'] == 0){
-        for (var key in row){
-            if (row[key] == null){
-                decision['win'] = key;
-            }
-        }
-    }
-
-    if (row_occurrences['X'] == 2 && row_occurrences['O'] == 0){
-        for (var key in row){
-            if (row[key] == null){
-                decision['stop_oppo'] = key;
-            }
-        }
+    
+    if (counter %2 == 0){ // X
+        decision['win'] = _take_next_decision(row, row_occurrences, 'X', 'O', 'win');
+        decision['stop_oppo'] = _take_next_decision(row, row_occurrences, 'O', 'X', 'stop_oppo');
+    } else { // O
+        decision['win'] = _take_next_decision(row, row_occurrences, 'O', 'X', 'win');
+        decision['stop_oppo'] = _take_next_decision(row, row_occurrences, 'X', 'O', 'stop_oppo');
     }
     return decision;
+}
+
+function _take_next_decision(row, row_occurrences, player, opponent, move){
+    if (row_occurrences[player] == 2 && row_occurrences[opponent] == 0){
+        for (var key in row){
+            if (row[key] == null){
+                return key;
+            }
+        }
+    }
 }
 
 function _update_decision(decision, next_decision){
