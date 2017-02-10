@@ -1,0 +1,31 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  align-items: center;
+  padding-top: .7em;
+}
+
+.row span {
+  display: inline-block;
+  padding: .5em;
+  margin: .1em;
+  background: rgba(0,0,0,0.3);
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: #fff;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+.row span:hover {
+  background: rgba(0,0,0,0.6);
+}
+
+#title-wrapper {
+  text-align: center;
+}
