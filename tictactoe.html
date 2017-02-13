@@ -1,21 +1,21 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Tic Tac Toe</title>
 
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
-    <script type="text/javascript" src="tictactoe.js"></script>
+    <script src="{% static "foundation/js/vendor/jquery.js" %}"></script>
+    <script type="text/javascript" src={% static "javascript/tictactoe.js" %}></script>
 
-    <link rel="stylesheet" type="text/css" href="tictactoe.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tictactoe.css' %}" />
 </head>
 <body>
 
     <div id="title-wrapper">
         <h3>Tic Tac Toe</h3>
+        <p>Score: <b><span id="score">100</span></b></p>
         <button id="pause-game">Pause Game</button>
         <h3 id="winner"></h3>
     </div>
