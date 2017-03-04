@@ -4,7 +4,7 @@ A Tic Tac Toc implementation in Javascript with a simple AI
 ### Setup
 No external plugins are required. Simply download the repository.
 
-### Run the game
+### Run
 To run the game open `tictactoe.html` and enjoy.
 
 ### Usage
@@ -22,8 +22,8 @@ Example message SCORE from game to the service
 
 ```json
 var message = {
-  messageType: "SCORE",
-  score: 500.0 // Float
+  "messageType": "SCORE",
+  "score": 500.0
 };
 ```
 
@@ -31,13 +31,13 @@ Example message SAVE from game to the service
 
 ```json
 var message =  {
-  messageType: "SAVE",
-  gameState: {
-    playerItems: [
+  "messageType": "SAVE",
+  "gameState": {
+    "playerItems": [
       "Sword",
       "Wizard Hat"
     ],
-    score: 506.0 // Float
+    "score": 506.0
   }
 };
 ```
@@ -46,7 +46,7 @@ Example message LOAD_REQUEST from game to the service
 
 ```json
 var message = {
-  messageType: "LOAD_REQUEST"
+  "messageType": "LOAD_REQUEST"
 };
 ```
 
@@ -54,13 +54,13 @@ Example message LOAD from service to the game
 
 ```json
 var message = {
-  messageType: "LOAD",
-  gameState: {
-    playerItems: [
+  "messageType": "LOAD",
+  "gameState": {
+    "playerItems": [
       "Sword",
       "Wizard Hat"
     ],
-    score: 506.0 // Float
+    "score": 507.0 
   }
 };
 ```
@@ -69,8 +69,8 @@ Example message ERROR from service to the game
 
 ```json
 var message =  {
-  messageType: "ERROR",
-  info: "Gamestate could not be loaded"
+  "messageType": "ERROR",
+  "info": "Gamestate could not be loaded"
 };
 ```
 
@@ -78,10 +78,10 @@ Example message SETTING from game to the service
 
 ```json
 var message =  {
-  messageType: "SETTING",
-  options: {
-    "width": 400, //Integer
-    "height": 300 //Integer
+  "messageType": "SETTING",
+  "options": {
+    "width": 400,
+    "height": 300 
   }
 };
 ```
