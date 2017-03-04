@@ -20,12 +20,16 @@ The game is supposed to be incorporated in an iFrame. It communicates with the p
 ### Messages examples
 Example message SCORE from game to the service
 
+```json
 var message = {
   messageType: "SCORE",
   score: 500.0 // Float
 };
+```
 
 Example message SAVE from game to the service
+
+```json
 var message =  {
   messageType: "SAVE",
   gameState: {
@@ -36,13 +40,19 @@ var message =  {
     score: 506.0 // Float
   }
 };
+```
 
 Example message LOAD_REQUEST from game to the service
+
+```json
 var message = {
   messageType: "LOAD_REQUEST"
 };
+```
 
 Example message LOAD from service to the game
+
+```json
 var message = {
   messageType: "LOAD",
   gameState: {
@@ -53,14 +63,20 @@ var message = {
     score: 506.0 // Float
   }
 };
+```
 
 Example message ERROR from service to the game
+
+```json
 var message =  {
   messageType: "ERROR",
   info: "Gamestate could not be loaded"
 };
+```
 
 Example message SETTING from game to the service
+
+```json
 var message =  {
   messageType: "SETTING",
   options: {
@@ -68,3 +84,4 @@ var message =  {
     "height": 300 //Integer
   }
 };
+```
